@@ -6,10 +6,12 @@ class AuthService {
 
   Future<void> _storedUserDetails(Map<String, dynamic>userDetails) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    print(userDetails);
     await prefs.setString('name', userDetails['name']);
     await prefs.setString('email', userDetails['email']);
     await prefs.setString('phone', userDetails['phone']);
     await prefs.setString('address', userDetails['address']);
+    await prefs.setString('user_id', userDetails['user_id']);
   }
 
   bool isValidEmail(String email) {
@@ -67,6 +69,8 @@ class AuthService {
       String?email = prefs.getString('email');
       String?phone = prefs.getString('phone');
       String?address = prefs.getString('address');
+      print(name);
+      print(email);
       return {
         'name': name,
         'email': email,

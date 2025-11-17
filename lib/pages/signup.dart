@@ -125,6 +125,7 @@ class _SignUpState extends State<SignUp> {
                             if(value == "Account Created"){
                               ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Account Created")));
                              Provider.of<Userprovider>(context, listen:false).loadUser();
+                              Navigator.restorablePushNamedAndRemoveUntil(context, "/", (route)=>false);
                             }else{
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(content:Text(value, style:TextStyle(color:Colors.white),),backgroundColor:Colors.red.shade400,)

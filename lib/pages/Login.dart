@@ -106,6 +106,7 @@ class _LoginState extends State<Login> {
                                  SnackBar(content: Text("Login Sucessfully"))
                                );
                                await Provider.of<Userprovider>(context, listen: false).loadUser();
+                               Navigator.restorablePushNamedAndRemoveUntil(context, "/", (route)=>false);
                              }else{
                                ScaffoldMessenger.of(context).showSnackBar(
                                    SnackBar(content:Text(value, style:TextStyle(color:Colors.white),),backgroundColor:Colors.red.shade400,)
