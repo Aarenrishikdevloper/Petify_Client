@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService {
-  final Dio _dio = Dio(BaseOptions(baseUrl: "http://192.168.55.84:3000"));
+  final Dio _dio = Dio(BaseOptions(baseUrl: "http://192.168.122.1:3000"));
 
   Future<void> _storedUserDetails(Map<String, dynamic>userDetails) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();

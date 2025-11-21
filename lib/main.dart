@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:mobile/components/no-internet.dart';
 import 'package:mobile/controller/auth_service.dart';
 import 'package:mobile/pages/Login.dart';
+import 'package:mobile/pages/Page_selection.dart';
 import 'package:mobile/pages/signup.dart';
+import 'package:mobile/provider/StoreProvider.dart';
 import 'package:mobile/provider/UserProvider.dart';
 import 'package:mobile/provider/internetConnectionprovider.dart';
 import 'package:provider/provider.dart';
@@ -32,7 +33,9 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_)=>Userprovider()),
-        ChangeNotifierProvider(create: (_)=> Internetconnectionprovider())
+        ChangeNotifierProvider(create: (_)=> Internetconnectionprovider()),
+        ChangeNotifierProvider(create:(context)=>Storeprovider()),
+
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -41,7 +44,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(fontFamily: "Poppins"),
        routes: {
           '/':(context)=>CheckUser(),
-         '/page_selection':(context)=>Text("hello world"),
+         '/page_selection':(context)=>PageSelection(defaultPage: 2),
           '/login':(context)=>Login(),
           "/signup":(context)=>SignUp(),
        },
