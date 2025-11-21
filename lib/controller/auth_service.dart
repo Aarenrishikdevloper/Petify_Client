@@ -69,6 +69,8 @@ class AuthService {
       String?email = prefs.getString('email');
       String?phone = prefs.getString('phone');
       String?address = prefs.getString('address');
+      String?token = prefs.getString('access_token');
+      print(token);
       print(name);
       print(email);
       return {

@@ -93,7 +93,9 @@ class _ZonecontainerState extends State<Zonecontainer> {
                   children: [
                     for(int  i = 0; i <(products.length >4?4:products.length); i++)
                       GestureDetector(
-                        onTap: (){},
+                        onTap: (){
+                          Navigator.pushNamed(context, '/view_product',arguments:products[i]);
+                        },
                         child: Container(
                           width: MediaQuery.sizeOf(context).width*0.43,
                           padding: EdgeInsets.all(8),

@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mobile/components/no-internet.dart';
 import 'package:mobile/controller/auth_service.dart';
+import 'package:mobile/pages/Category.dart';
 import 'package:mobile/pages/Login.dart';
 import 'package:mobile/pages/Page_selection.dart';
 import 'package:mobile/pages/signup.dart';
+import 'package:mobile/pages/viewProduct.dart';
 import 'package:mobile/provider/StoreProvider.dart';
 import 'package:mobile/provider/UserProvider.dart';
 import 'package:mobile/provider/internetConnectionprovider.dart';
@@ -47,6 +49,8 @@ class MyApp extends StatelessWidget {
          '/page_selection':(context)=>PageSelection(defaultPage: 2),
           '/login':(context)=>Login(),
           "/signup":(context)=>SignUp(),
+          '/specific':(context)=>Category(),
+         '/view_product':(context)=>Viewproduct(),
        },
 
 

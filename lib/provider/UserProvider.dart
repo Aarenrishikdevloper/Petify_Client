@@ -18,6 +18,7 @@ class Userprovider extends ChangeNotifier {
   Future<void> loadUser() async{
      SharedPreferences prefs = await SharedPreferences.getInstance();
      String?token = prefs.getString('access_token');
+     print(token);
      if(token == null){
        return ;
      }

@@ -2,7 +2,7 @@ class Constants {
   final List<Map<String, String>> categories =[
     {'label':'Cat foods',  'argument':'cat food', 'image':'assets/images/cat-removebg-preview.png'},
     {'label':'dog foods',  'argument':'dog food', 'image':'assets/images/dog-removebg-preview.png'},
-    {'label':'Collars',  'argument':'collars', 'image':'assets/images/collar-removebg-preview.png'},
+    {'label':'Collars',  'argument':'collar', 'image':'assets/images/collar-removebg-preview.png'},
     {'label':'Pet Toys',  'argument':'toys', 'image':'assets/images/toys-removebg-preview.png'},
 
   ];
