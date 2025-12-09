@@ -34,4 +34,17 @@ class Product {
   static List<Product> fromJsonList(List<dynamic>jsonlist){
     return jsonlist.map((json)=>Product.fromJson(json)).toList();
   }
+  Map<String, dynamic> toJson() {
+    return {
+      '_id': id,
+      'name': name,
+      'description': description,
+      'image': image,
+      'oldPrice': oldPrice,
+      'newPrice': newPrice,
+      'category': category,
+      'maxQuantity': maxQuantity,
+
+    };
+  }
 }

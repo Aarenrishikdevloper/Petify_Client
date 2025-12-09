@@ -2,14 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mobile/components/no-internet.dart';
 import 'package:mobile/controller/auth_service.dart';
+import 'package:mobile/models/medicalmodel.dart';
 import 'package:mobile/pages/Category.dart';
+import 'package:mobile/pages/Chatbot.dart';
 import 'package:mobile/pages/Login.dart';
 import 'package:mobile/pages/Page_selection.dart';
+import 'package:mobile/pages/UpdateProfile.dart';
 import 'package:mobile/pages/signup.dart';
 import 'package:mobile/pages/viewProduct.dart';
+import 'package:mobile/provider/CartProvider.dart';
 import 'package:mobile/provider/StoreProvider.dart';
 import 'package:mobile/provider/UserProvider.dart';
+import 'package:mobile/provider/UserpetProvider.dart';
 import 'package:mobile/provider/internetConnectionprovider.dart';
+import 'package:mobile/provider/medicalprovider.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -37,6 +43,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_)=>Userprovider()),
         ChangeNotifierProvider(create: (_)=> Internetconnectionprovider()),
         ChangeNotifierProvider(create:(context)=>Storeprovider()),
+        ChangeNotifierProvider(create:(_)=>Userpetprovider()),
+        ChangeNotifierProvider(create: (_)=>Medicalprovider()),
+        ChangeNotifierProvider(create: (_)=>Cartprovider()),
 
       ],
       child: MaterialApp(
@@ -51,6 +60,10 @@ class MyApp extends StatelessWidget {
           "/signup":(context)=>SignUp(),
           '/specific':(context)=>Category(),
          '/view_product':(context)=>Viewproduct(),
+         "/chatbot":(context)=>Chatbot(),
+         "/update-profile":(context)=>Updateprofile(),
+         "/from_anyWare_to_cart":(context)=>PageSelection(defaultPage: 0),
+          "/from_anywhere_to_store":(context)=>PageSelection(defaultPage: 1),
        },
 
 
@@ -77,10 +90,24 @@ class _CheckUserState extends State<CheckUser> {
     print(user);
     if(user != null){
       String userId = user['user_id'];
+      await Provider.of<Cartprovider>(context, listen: false).readCartdaTa();
+      await Provider.of<Userpetprovider>(context,listen: false).fetchUserPets();
+      await _waitForpetsLoad();
+      await Provider.of<Medicalprovider>(context, listen: false).intializeMedicals(context);
+
       Navigator.pushNamed(context, '/page_selection');
     }else{
       Navigator.pushNamed(context, '/login');
     }
+  }
+  Future<void>_waitForpetsLoad()async{
+    await Future.doWhile(()async{
+      if(Provider.of<Userpetprovider>(context,listen:false ).isLoading){
+        await Future.delayed(Duration(milliseconds:201 ));
+        return true;
+      }
+      return false;
+    });
   }
   @override
   Widget build(BuildContext context){

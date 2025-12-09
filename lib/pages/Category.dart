@@ -65,7 +65,7 @@ class _CategoryState extends State<Category> {
                                   borderRadius: BorderRadius.circular(8),
                                   image: DecorationImage(
                                     image: NetworkImage(product.image),
-                                    fit: BoxFit.contain,
+                                    fit: BoxFit.fitHeight,
                                   )
                                 ),
                               ),

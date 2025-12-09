@@ -15,4 +15,12 @@ class Constants {
       return discount.toStringAsFixed(0);
     }
   }
+
 }
+class ChatMessage{
+  final String text;
+  final bool isUser;
+  ChatMessage({required this.text, required this.isUser});
+}
+
+

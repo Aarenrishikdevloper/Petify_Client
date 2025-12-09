@@ -1,4 +1,5 @@
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fluentui_icons/fluentui_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile/controller/db_service.dart';
@@ -92,13 +93,17 @@ class _DefaultsearchbarState extends State<Defaultsearchbar> {
           ),
           if(searchResults.isNotEmpty) ...[
             Container(
+
               padding: EdgeInsets.only(top:10),
               child: ListView.builder(
                 shrinkWrap: true,
+                physics: BouncingScrollPhysics(),
                 itemCount: searchResults.length,
                 itemBuilder: (context,index){
                   return GestureDetector(
-                    onTap: (){},
+                    onTap: (){
+                      Navigator.pushNamed( context,'/view_product',arguments:searchResults[index] );
+                    },
                     child:Card(
                       elevation: 2,
                       margin: EdgeInsets.symmetric(vertical:8, horizontal:16),
@@ -111,11 +116,11 @@ class _DefaultsearchbarState extends State<Defaultsearchbar> {
                           children: [
                             ClipRRect(
                               borderRadius: BorderRadius.circular(8),
-                              child:Image.network(
-                                searchResults[index].image,
+                              child:CachedNetworkImage(
+                                imageUrl:searchResults[index].image,
                                 width: 60,
                                 height: 60,
-                                fit:BoxFit.cover
+                                fit:BoxFit.scaleDown,
                               )
 
                             ),

@@ -1,4 +1,5 @@
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile/provider/StoreProvider.dart';
@@ -46,9 +47,9 @@ class _PromocontainerState extends State<Promocontainer> {
                     Navigator.pushReplacementNamed(context, '/from_anywhere_to_store');
                   }
                 },
-                child:Image.network(
-                   promo.image,
-                  fit: BoxFit.cover,
+                child:CachedNetworkImage(
+                   imageUrl: promo.image,
+                  fit: BoxFit.fitWidth,
                 )
               );
            }).toList(),

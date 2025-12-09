@@ -1,6 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile/constants/constants.dart';
 import 'package:mobile/models/product_model.dart';
+import 'package:mobile/provider/CartProvider.dart';
+import 'package:provider/provider.dart';
 
 class Viewproduct extends StatefulWidget {
   const Viewproduct({super.key});
@@ -25,8 +28,8 @@ class _ViewproductState extends State<Viewproduct> {
           SingleChildScrollView(
             child: Column(
               children: [
-                Image.network(
-                  argument.image,
+                CachedNetworkImage(
+                  imageUrl:argument.image,
                   height: 300,
                   width: double.infinity,
                   fit: BoxFit.scaleDown,
@@ -126,7 +129,13 @@ class _ViewproductState extends State<Viewproduct> {
                       height: 60,
                       width: MediaQuery.of(context).size.width * .5,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: ()async {
+                           String message = await  Provider.of<Cartprovider>(context, listen:false ).addToCart(argument.id, 1);
+                           ScaffoldMessenger.of(context).showSnackBar(
+
+                             SnackBar(content:Text(message))
+                           );
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Color.fromARGB(255, 30, 136, 229),
                           foregroundColor: Color.fromARGB(255, 255, 255, 255),

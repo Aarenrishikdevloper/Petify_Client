@@ -24,7 +24,7 @@ class _StorePageState extends State<StorePage> {
     final isConnectedToInternet = Provider.of<Internetconnectionprovider>(context).isConnectToInternet;
     return Scaffold(
       backgroundColor: Color(0xFFeeedf2),
-      body: !isConnectedToInternet? const NoInternet(): SafeArea(
+      body:!isConnectedToInternet ?NoInternet():  SafeArea(
          child: SingleChildScrollView(
            child: Column(
              children: [

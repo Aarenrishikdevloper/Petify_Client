@@ -1,5 +1,6 @@
 
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile/controller/auth_service.dart';
 import 'package:mobile/models/user_model.dart';
@@ -36,5 +37,24 @@ class Userprovider extends ChangeNotifier {
      }catch(e){
        print(e);
      }
+  }
+  Future<String>updateUser(String newName, String newAddress, String newPhone)async{
+    print(newName);
+    print(newAddress);
+    print(newPhone);
+    try{
+       String result = await _authService.updateUser(newName, newAddress, newPhone);
+       if(result == "User Updated successfully"){
+          name = newName;
+          address = newAddress;
+          phone = newPhone;
+          notifyListeners();
+          return result;
+       }else{
+         return result;
+       }
+    }catch(e){
+      return "Error updating user: e";
+    }
   }
 }

@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile/constants/constants.dart';
 import 'package:mobile/controller/db_service.dart';
@@ -97,7 +98,7 @@ class _ZonecontainerState extends State<Zonecontainer> {
                           Navigator.pushNamed(context, '/view_product',arguments:products[i]);
                         },
                         child: Container(
-                          width: MediaQuery.sizeOf(context).width*0.43,
+                          width: MediaQuery.sizeOf(context).width * 0.43,
                           padding: EdgeInsets.all(8),
                           height: 180,
                           margin: EdgeInsets.all(5),
@@ -110,8 +111,8 @@ class _ZonecontainerState extends State<Zonecontainer> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Center(
-                                child: Image.network(
-                                  products[i].image,
+                                child: CachedNetworkImage(
+                                   imageUrl:products[i].image,
                                   height: 120,
                                 ),
                               ),

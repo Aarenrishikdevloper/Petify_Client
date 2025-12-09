@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService {
-  final Dio _dio = Dio(BaseOptions(baseUrl: "http://192.168.122.1:3000"));
+  final Dio _dio = Dio(BaseOptions(baseUrl: "http://192.168.100.84:3000"));
 
   Future<void> _storedUserDetails(Map<String, dynamic>userDetails) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -85,7 +85,9 @@ class AuthService {
     }
   }
  Future<String>login(String email, String password)async{
+    print(email);
     if(!isValidEmail(email)){
+      print(email);
       return"Invalid Email";
     }
     try{
@@ -95,6 +97,7 @@ class AuthService {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.setString("access_token", token);
       final user = response.data['user'];
+      print(user);
       Map<String, dynamic> userDetails = {
         'name': user['name'] ?? "Unknown",
         'email': user['email'] ?? '',
@@ -114,5 +117,38 @@ class AuthService {
     }
 
  }
+  Future<String>updateUser(String name, String address,String phone)async{
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String?token = prefs.getString('access_token');
+      if (token == null) {
+        return "User not logged in";
+      }
+      Response response = await _dio.put("/updateUser",data:{
+        "name":name,
+        "address":address,
+        "phone":phone
+      },
+        options: Options(
+          headers: {
+            "Authorization":"Bearer $token"
+          }
+
+        )
+      );
+      if(response.statusCode == 200){
+        await prefs.setString('phone', phone);
+        await prefs.setString('address', address);
+        await prefs.setString('name', name);
+
+        return "User Updated successfully";
+      }else{
+        return "Failure to update user";
+      }
+    }catch(e){
+      print(e);
+         return e.toString();
+    }
+  }
 
 }

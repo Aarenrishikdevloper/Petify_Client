@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class Bannercontainer extends StatelessWidget {
@@ -12,9 +13,9 @@ class Bannercontainer extends StatelessWidget {
       },
       child: Container(
         padding: EdgeInsets.all(8),
-        child: Image.network(
-           image,
-          fit: BoxFit.cover,
+        child: CachedNetworkImage(
+           imageUrl:image,
+          fit: BoxFit.fitWidth,
         ),
       ),
     );
