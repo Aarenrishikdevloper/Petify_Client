@@ -2,6 +2,7 @@ import 'package:fluentui_icons/fluentui_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile/pages/CartPage.dart';
 import 'package:mobile/pages/Home.dart';
+import 'package:mobile/pages/More.dart';
 import 'package:mobile/pages/Store_page.dart';
 
 class PageSelection extends StatefulWidget {
@@ -30,7 +31,7 @@ class _PageSelectionState extends State<PageSelection> {
      StorePage(),
      Home(),
     Text("hello World"),
-    Text("hello World"),
+    More(),
 
   ];
   @override

@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:mobile/constants/constants.dart';
 import 'package:mobile/models/Cartmodel.dart';
+import 'package:mobile/models/Categorymodel.dart';
+import 'package:mobile/models/feedbackmodel.dart';
 import 'package:mobile/models/medicalmodel.dart';
 import 'package:mobile/models/product_model.dart';
 import 'package:mobile/models/promomodel.dart';
@@ -233,5 +235,69 @@ class DbService {
       throw Exception("Failed to reduce quantity; $e");
     }
 
+  }
+  Stream<List<Category>> readCategories()async*{
+     try{
+        final response = await _dio.get("$baseUrl/category");
+         List<Map<String,dynamic>> categoriesJson = List<Map<String,dynamic>>.from(response.data["data"]);
+         yield Category.fromJsonList(categoriesJson);
+     }catch(e){
+       throw Exception("failed to fetch categories: $e");
+     }
+  }  
+  Future<void> addFeedback( String feedback)async{
+     try{
+       SharedPreferences prefs = await SharedPreferences.getInstance();
+       String?token = prefs.getString('access_token');
+       final response = await _dio.post("$baseUrl/create-feedback",data:{
+          "feedback":feedback,
+          "time":DateTime.now().toIso8601String(),
+       },
+        options: Options(
+
+           headers: {
+           "Authorization": "Bearer $token"
+           }
+       )
+       );
+       print(response);
+
+     }catch(e){
+       throw Exception("Something Went Wrong: $e");
+     }
+  }   
+  Stream<List<Feedbackmodel>>getFeedbacks()async*{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String?token = prefs.getString('access_token');
+    try{
+      final res = await _dio.get('$baseUrl/feedback',options: Options(
+        headers: {
+          "Authorization": "Bearer $token"
+        }
+      ));
+      List<Feedbackmodel>feedbacks = Feedbackmodel.fromJsonList(
+        List<Map<String,dynamic>>.from(res.data["data"])
+      );
+      yield feedbacks;
+    }catch(e){
+      if(e is DioException && e.response?.statusCode == 500){
+        yield[];
+      }else{
+        print("Error fetching feedbacks: $e");
+      }
+    }
+  }   
+  Future<void>deletefeedback(String feedbackId)async{
+     try{
+       SharedPreferences prefs = await SharedPreferences.getInstance();
+       String?token = prefs.getString('access_token');
+       await _dio.delete("$baseUrl/deletefeedback/$feedbackId",options: Options(
+           headers: {
+             "Authorization": "Bearer $token"
+           }
+       ));
+     }catch(e){
+       throw Exception("failed to delete feedback: $e");
+     }
   }
 }   

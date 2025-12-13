@@ -6,6 +6,8 @@ import 'package:mobile/models/promomodel.dart';
 import 'package:mobile/provider/StoreProvider.dart';
 import 'package:provider/provider.dart';
 
+import '../models/Categorymodel.dart';
+
 class Homestorecontainer extends StatefulWidget {
   const Homestorecontainer({super.key});
 
@@ -24,6 +26,7 @@ class _HomestorecontainerState extends State<Homestorecontainer> {
     return Consumer<Storeprovider>(
       builder: (context,provider, child){
         List<PromoBannersModel>banners = provider.banners;
+
         int minlenght = getMinLenght(Constants().categories.length, banners.length );
         return Column(
             children:List.generate(minlenght, (i){

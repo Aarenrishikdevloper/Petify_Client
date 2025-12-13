@@ -24,7 +24,7 @@ class _NoInternetState extends State<NoInternet> {
 
             ),
             Text(
-              "No internet connection \n found  🛜",
+              "No internet connection \n found 📶",
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,

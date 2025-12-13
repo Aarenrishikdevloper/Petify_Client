@@ -14,6 +14,7 @@ import 'package:mobile/provider/CartProvider.dart';
 import 'package:mobile/provider/StoreProvider.dart';
 import 'package:mobile/provider/UserProvider.dart';
 import 'package:mobile/provider/UserpetProvider.dart';
+import 'package:mobile/provider/feedbackProvider.dart';
 import 'package:mobile/provider/internetConnectionprovider.dart';
 import 'package:mobile/provider/medicalprovider.dart';
 import 'package:provider/provider.dart';
@@ -46,6 +47,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create:(_)=>Userpetprovider()),
         ChangeNotifierProvider(create: (_)=>Medicalprovider()),
         ChangeNotifierProvider(create: (_)=>Cartprovider()),
+        ChangeNotifierProvider(create: (_)=>Feedbackprovider()),
 
       ],
       child: MaterialApp(
@@ -64,6 +66,7 @@ class MyApp extends StatelessWidget {
          "/update-profile":(context)=>Updateprofile(),
          "/from_anyWare_to_cart":(context)=>PageSelection(defaultPage: 0),
           "/from_anywhere_to_store":(context)=>PageSelection(defaultPage: 1),
+
        },
 
 
@@ -94,6 +97,7 @@ class _CheckUserState extends State<CheckUser> {
       await Provider.of<Userpetprovider>(context,listen: false).fetchUserPets();
       await _waitForpetsLoad();
       await Provider.of<Medicalprovider>(context, listen: false).intializeMedicals(context);
+      await Provider.of<Feedbackprovider>(context, listen: false).fetchFeedbacks();
 
       Navigator.pushNamed(context, '/page_selection');
     }else{
