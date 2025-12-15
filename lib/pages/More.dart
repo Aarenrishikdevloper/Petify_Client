@@ -1,6 +1,7 @@
 import 'package:fluentui_icons/fluentui_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:mobile/pages/Pet_health_care.dart';
 import 'package:mobile/pages/ProfilePage.dart';
 import 'package:mobile/pages/feedback.dart';
 
@@ -112,7 +113,9 @@ class _MoreState extends State<More> with SingleTickerProviderStateMixin {
                   ],
 
                 ),
-                onTap: (){},
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder:(context)=>PetHealthCare()));
+                },
               ),
               Divider(),
               ListTile(

@@ -11,7 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class DbService {
   final Dio _dio = Dio();
-  final String baseUrl = "http://192.168.100.84:3000";
+  final String baseUrl = "http://192.168.235.84:3000";
   Future<List<Product>>searchProductBYName(String query) async{
     try {
       final response = await _dio.get(
