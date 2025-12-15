@@ -1,9 +1,15 @@
 import 'package:fluentui_icons/fluentui_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:mobile/controller/auth_service.dart';
 import 'package:mobile/pages/Pet_health_care.dart';
 import 'package:mobile/pages/ProfilePage.dart';
 import 'package:mobile/pages/feedback.dart';
+import 'package:mobile/provider/CartProvider.dart';
+import 'package:mobile/provider/UserProvider.dart';
+import 'package:mobile/provider/UserpetProvider.dart';
+import 'package:mobile/provider/medicalprovider.dart';
+import 'package:provider/provider.dart';
 
 class More extends StatefulWidget {
   const More({super.key});
@@ -179,6 +185,19 @@ class _MoreState extends State<More> with SingleTickerProviderStateMixin {
                 leading: Icon(Icons.exit_to_app),
                 title:Text("Log Out"),
                 subtitle: Text("Sign out of your account"),
+                onTap:()async{
+                  Provider.of<Userprovider>(context, listen:false).cancelProvider();
+                  Provider.of<Userpetprovider>(context, listen:false).cancelProvider();
+                  Provider.of<Medicalprovider>(context, listen:false).cancelProvider();
+                  Provider.of<Cartprovider>(context, listen:false).cancelProvider();
+                  await AuthService().logout();
+                  Navigator.pushNamedAndRemoveUntil(context, "/login", (route)=>false);
+
+
+
+
+
+                } ,
               )
 
             ],

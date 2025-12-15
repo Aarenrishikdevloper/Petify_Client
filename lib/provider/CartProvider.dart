@@ -69,4 +69,10 @@ class  Cartprovider extends ChangeNotifier {
        throw Exception("Something Went wrong: $e");
      }
   }
+  Future<void> cancelProvider()async{
+    _cartSubscription?.cancel();
+    _cartSubscription = null;
+    _carts = [];
+    notifyListeners();
+  }
 }

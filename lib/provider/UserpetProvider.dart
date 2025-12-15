@@ -59,4 +59,10 @@ class Userpetprovider extends ChangeNotifier{
       print("error deleting pet: $e");
     }
   }
+  Future<void> cancelProvider()async{
+    _petsSubscription?.cancel();
+    _petsSubscription = null;
+    _userpets = [];
+    notifyListeners();
+  }
 }

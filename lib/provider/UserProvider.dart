@@ -57,4 +57,11 @@ class Userprovider extends ChangeNotifier {
       return "Error updating user: e";
     }
   }
+  Future<void> cancelProvider()async{
+     name = "";
+     email = "";
+     phone = "";
+     userId = "";
+     notifyListeners();
+  }
 }

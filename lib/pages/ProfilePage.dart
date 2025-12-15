@@ -3,6 +3,11 @@ import 'package:lottie/lottie.dart';
 import 'package:mobile/provider/UserProvider.dart';
 import 'package:provider/provider.dart';
 
+import '../controller/auth_service.dart';
+import '../provider/CartProvider.dart';
+import '../provider/UserpetProvider.dart';
+import '../provider/medicalprovider.dart';
+
 class Profilepage extends StatefulWidget {
   const Profilepage({super.key});
 
@@ -102,6 +107,16 @@ class _ProfilepageState extends State<Profilepage> {
              ListTile(
                title: Text("Logout"),
                leading: Icon(Icons.logout_outlined),
+               onTap: ()async{
+                 Provider.of<Userprovider>(context, listen:false).cancelProvider();
+                 Provider.of<Userpetprovider>(context, listen:false).cancelProvider();
+                 Provider.of<Medicalprovider>(context, listen:false).cancelProvider();
+                 Provider.of<Cartprovider>(context, listen:false).cancelProvider();
+                 await AuthService().logout();
+                 Navigator.pushNamedAndRemoveUntil(context, "/login", (route)=>false);
+
+
+               },
              )
 
            ],

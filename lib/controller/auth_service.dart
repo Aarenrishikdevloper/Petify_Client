@@ -150,5 +150,14 @@ class AuthService {
          return e.toString();
     }
   }
+  Future<void> logout() async{
+    SharedPreferences prefs =  await SharedPreferences.getInstance();
+   await prefs.remove('name');
+    await prefs.remove('email');
+    await prefs.remove('phone');
+    await prefs.remove('address');
+    await prefs.remove('access_token');
+    await  prefs.remove('user_id');
+  }
 
 }

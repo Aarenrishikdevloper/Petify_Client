@@ -36,4 +36,10 @@ class Medicalprovider extends ChangeNotifier {
       notifyListeners();
     }
   }
+  Future<void> cancelProvider()async{
+    _medicalSubscription?.cancel();
+    _medicalSubscription = null;
+    _medicals=[];
+    notifyListeners();
+  }
 }

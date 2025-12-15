@@ -42,5 +42,10 @@ class Feedbackprovider extends ChangeNotifier {
       print("Error adding feedback: $e");
     }
   }
-
+  Future<void> cancelProvider()async{
+    _feedbacksubscriber?.cancel();
+    _feedbacksubscriber = null;
+    _feedbacks = [];
+    notifyListeners();
+  }
 }
